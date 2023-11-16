@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>8 BALL PRO</title>
+    <link rel="stylesheet" href="css/reset.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/orientation_utils.css" type="text/css">
+    <link rel="stylesheet" href="css/ios_fullscreen.css" type="text/css">
+    <link rel='shortcut icon' type='image/x-icon' href='./favicon.ico' />
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" /> -->
+    <meta name="msapplication-tap-highlight" content="no" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
+
+    <script type="text/javascript" src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.4/dist/index.js"></script>
+    <script type="text/javascript"
+        src="https://unpkg.com/@walletconnect/web3-provider@1.6.5/dist/umd/index.min.js"></script>
+
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/easeljs-NEXT.min.js"></script>
+    <script type="text/javascript" src="js/tweenjs.js"></script>
+    <script type="text/javascript" src="js/three.min.js"></script>
+    <script type="text/javascript" src="js/screenfull.js"></script>
+    <script type="text/javascript" src="js/sprintf.min.js"></script>
+    <script type="text/javascript" src="js/platform.js"></script>
+    <script type="text/javascript" src="js/ios_fullscreen.js"></script>
+    <script type="text/javascript" src="js/howler.min.js"></script>
+    <script type="text/javascript" src="js/ctl_utils.js"></script>
+    <script type="text/javascript" src="js/sprite_lib.js"></script>
+    <script type="text/javascript" src="js/settings.js"></script>
+    <script type="text/javascript" src="js/CAreYouSurePanel.js"></script>
+    <script type="text/javascript" src="js/CInputController.js"></script>
+    <script type="text/javascript" src="js/CLang.min.js"></script>
+    <script type="text/javascript" src="js/CPreloader.js"></script>
+    <script type="text/javascript" src="js/CMain.js"></script>
+    <script type="text/javascript" src="js/CTextButton.js"></script>
+    <script type="text/javascript" src="js/CGfxButton.js"></script>
+    <script type="text/javascript" src="js/CToggle.js"></script>
+    <script type="text/javascript" src="js/CMenu.js"></script>
+    <script type="text/javascript" src="js/CDifficultyMenu.js"></script>
+    <script type="text/javascript" src="js/CGame.js"></script>
+    <script type="text/javascript" src="js/CInterface.js"></script>
+    <script type="text/javascript" src="js/CScene.js"></script>
+    <script type="text/javascript" src="js/CCreditsPanel.js"></script>
+    <script type="text/javascript" src="js/CTable.js"></script>
+    <script type="text/javascript" src="js/CGUIExpandible.js"></script>
+    <script type="text/javascript" src="js/CEdge.js"></script>
+    <script type="text/javascript" src="js/CVector2.js"></script>
+    <script type="text/javascript" src="js/CMath.js"></script>
+    <script type="text/javascript" src="js/CCTLText.js"></script>
+    <script type="text/javascript" src="js/CBall.js"></script>
+    <script type="text/javascript" src="js/CStick.js"></script>
+    <script type="text/javascript" src="js/CPhysicsController.js"></script>
+    <script type="text/javascript" src="js/CPlayerGUI.js"></script>
+    <script type="text/javascript" src="js/CBallSpinGUI.js"></script>
+    <script type="text/javascript" src="js/CGameOverPanel.js"></script>
+    <script type="text/javascript" src="js/CHandBallDrag.js"></script>
+    <script type="text/javascript" src="js/CEffectText.js"></script>
+    <script type="text/javascript" src="js/CInteractiveHelp.js"></script>
+    <script type="text/javascript" src="js/CButLang.js"></script>
+    <script type="text/javascript" src="js/CRollingScore.js"></script>
+    <script type="text/javascript" src="js/CScoreGUI.js"></script>
+    <script type="text/javascript" src="js/CShotPowerBar.js"></script>
+    <script type="text/javascript" src="js/CLocalStorage.js"></script>
+    <script type="text/javascript" src="js/CNTable.js"></script>
+    <script type="text/javascript" src="js/CRoomList.js"></script>
+    <script type="text/javascript" src="js/CInputText.js"></script>
+    <script type="text/javascript" src="js/CSearchInput.js"></script>
+    <script type="text/javascript" src="js/socket.io.min.js"></script>
+    <script type="text/javascript" src="js/WalletConnect.js"></script>
+    <script type="text/javascript" src="js/CProfilePanel.js"></script>
+
+
+    <style>
+        input {
+            background-color: rgba(0, 0, 0, 0);
+            /* border-radius: 30px; */
+            border: 1px solid white;
+            color: white;
+            padding: 5px;
+            font-size: 15px;
+
+        }
+
+        .skew {
+            /* transform: skewX(-20deg); */
+        }
+
+
+        .fullbtn {
+            color: white;
+            background-size: 150px 150% !important;
+        }
+
+
+        .btn1 {
+            border: 0;
+            transition: all 0.3s;
+            background-color: transparent;
+            color: white;
+            font-size: 15px;
+            background-size: 100px 150%;
+            width: 100px;
+            padding: 5px;
+        }
+
+        button {
+            background-position: center;
+            background-image: url("./sprites/player_gui.png");
+            transition: all 0.3s;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .fullbtn skew:active {
+            transform: scale(0.9) !important;
+        }
+
+
+        .btn1:active {
+            transform: scale(0.9);
+        }
+
+        .light-btn-group {
+            padding: 1px;
+            display: flex;
+            flex-direction: row;
+        }
+
+
+        .join-roomid {
+            padding: 1px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        #room_interface {
+            /* padding: 100px; */
+            /* width: 100%; */
+            /* height: 100%; */
+            top: 50%;
+            left: 50%;
+            /* display: flex; */
+            /* justify-content: center; */
+            /* center horizontally */
+        }
+
+        .rooms_wraper {
+            position: absolute;
+            padding: 10px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            /* background-color: #777777a8; */
+            border: 1px dashed #777777ce;
+        }
+
+        .head-wraper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .footer-wraper {
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+            padding: 10px;
+        }
+
+        .content-wraper {
+            display: inline-block;
+            /* flex-direction: column; */
+            /* flex: 1; */
+            /* border: 1px solid white; */
+            overflow-x: hidden;
+            color: white;
+            overflow-y: scroll;
+            overflow-wrap: break-word;
+            /* overflow-y: hi; */
+        }
+
+        /* Track */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .vs_card {
+            margin: 1%;
+            width: 31%;
+            height: 50%;
+            background-image: url(./img/room.png);
+            background-size: 100% 100%;
+            display: inline-block;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .vs-card-wraper {
+            display: flex;
+            flex-direction: row;
+            align-items: end;
+            justify-content: space-around;
+            height: 70%;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+
+        .vs-card-avatar {
+            display: flex;
+            flex-direction: column;
+            font-size: 90%;
+            align-items: center;
+            width: 30%;
+        }
+
+        .room-user-name {
+            width: 100%;
+            text-align: center;
+        }
+
+        .vs-card-btn {
+            /* position:absolute; */
+        }
+
+        .vs-card-btn {
+            /* transform: skewX(20deg); */
+        }
+
+
+        .vs-card-btn:active {
+            transform: scale(0.9) !important;
+        }
+
+
+        .info-status-btn {
+            /* transform: skewX(-20deg); */
+
+            /* border-left: 1px solid rgb(255, 255, 255); */
+            /* border-right: 1px solid rgb(255, 255, 255); */
+            /* background-image: url(./img/roomcard-bg.png); */
+            /* background-size: 100% 100%; */
+            /* background-color: rgba(0, 0, 0, 0.1); */
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+            width: 40%;
+
+        }
+
+        .vs-active-avatar {
+            stroke: rgb(148, 149, 148);
+            fill: antiquewhite;
+        }
+
+
+        .fade-on-scroll {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .fade-on-scroll.fade {
+            opacity: 0;
+        }
+
+        .create_room_modal_wraper {
+            position: absolute;
+            padding: 20px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px dashed #777777ce;
+        }
+
+        .btn-group-modal {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .input-group {
+            margin: 10px;
+        }
+
+        .message-wrapper {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+
+        .message-panel {
+            background-color: #55555544;
+            /* border: 1px solid rgba(0, 250, 0, 0.795); */
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: 50%;
+            right: 50%;
+            transform: translate(-105%, -105%);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .message-panel div {
+            width: 100%;
+            height: 200px;
+            background-color: rgba(74, 121, 121, 0.418);
+            overflow-y: auto;
+        }
+
+        .message-panel p {
+            margin-top: 3px;
+            /* width: 100%; */
+            padding: 4px;
+            background-color: rgba(74, 121, 121, 0.233);
+        }
+
+        .messa_self {
+            color: white;
+        }
+
+        .message_other {
+            color: #22b9ff;
+            text-align: end;
+        }
+
+        .message-panel input {
+            font-size: 15px;
+            /* border: 1px solid red; */
+            border-width: 0;
+            padding: 6px;
+            background-color: rgba(24, 185, 185, 0.13);
+        }
+
+
+        #message:active {
+            border-width: 0;
+            font-size: 15px;
+            /* border: 1px solid rgba(255, 0, 0, 0); */
+        }
+
+        .bet-amount {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 60%;
+        }
+    </style>
+</head>
+
+<body ondragstart="return false;" ondrop="return false;">
+    <div style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%"></div>
+    <script>
+        var socket = io(document.location.host)
+
+        $(document).ready(function () {
+
+            var oMain = new CMain({
+                audio_enable_on_startup: false, //ENABLE/DISABLE AUDIO WHEN GAME STARTS 
+                fullscreen: true,   //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
+                check_orientation: true, //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
+                points_for_ball_pot: 20, //SET THIS VALUE TO ADD SCORE ON EVERY BALL POT BY USER
+                points_for_fault: -40 // SET THIS VALUE TO DECREASE SCORE ON USER FAUL
+            });
+
+            $(oMain).on("start_session", function (evt) {
+                if (getParamValue('ctl-arcade') === "true") {
+                    parent.__ctlArcadeStartSession();
+                }
+                //...ADD YOUR CODE HERE EVENTUALLY
+            });
+
+            $(oMain).on("end_session", function (evt) {
+                if (getParamValue('ctl-arcade') === "true") {
+                    parent.__ctlArcadeEndSession();
+                }
+                //...ADD YOUR CODE HERE EVENTUALLY
+            });
+
+            $(oMain).on("save_score", function (evt, iScore) {
+                if (getParamValue('ctl-arcade') === "true") {
+                    parent.__ctlArcadeSaveScore({ score: iScore });
+                }
+                //...ADD YOUR CODE HERE EVENTUALLY
+            });
+
+            $(oMain).on("start_level", function (evt, iLevel) {
+                if (getParamValue('ctl-arcade') === "true") {
+                    parent.__ctlArcadeStartLevel({ level: iLevel });
+                }
+                //...ADD YOUR CODE HERE EVENTUALLY
+            });
+
+            $(oMain).on("end_level", function (evt, iLevel) {
+                if (getParamValue('ctl-arcade') === "true") {
+                    parent.__ctlArcadeEndLevel({ level: iLevel });
+                }
+                //...ADD YOUR CODE HERE EVENTUALLY
+            });
+
+            $(oMain).on("restart_level", function (evt, iLevel) {
+                if (getParamValue('ctl-arcade') === "true") {
+                    parent.__ctlArcadeRestartLevel({ level: iLevel });
+                }
+            });
+
+            $(oMain).on("show_interlevel_ad", function (evt) {
+                if (getParamValue('ctl-arcade') === "true") {
+                    parent.__ctlArcadeShowInterlevelAD();
+                }
+                //...ADD YOUR CODE HERE EVENTUALLY
+            });
+
+            $(oMain).on("share_event", function (evt, iScore) {
+                if (getParamValue('ctl-arcade') === "true") {
+                    parent.__ctlArcadeShareEvent({
+                        img: TEXT_SHARE_IMAGE,
+                        title: TEXT_SHARE_TITLE,
+                        msg: TEXT_SHARE_MSG1 + iScore + TEXT_SHARE_MSG2,
+                        msg_share: TEXT_SHARE_SHARE1 + iScore
+                    });
+                }
+                //...ADD YOUR CODE HERE EVENTUALLY
+            });
+
+            if (isIOS()) {
+                setTimeout(function () { sizeHandler(); }, 200);
+            } else {
+                sizeHandler();
+            }
+
+
+
+        });
+
+    </script>
+
+    <div class="check-fonts">
+        <p class="check-font-1">1</p>
+    </div>
+
+    <canvas id="canvas_game" class='ani_hack' width="1920" height="1080"> </canvas>
+    <canvas id="canvas_3d" class='ani_hack' width="1920" height="1080"> </canvas>
+    <canvas id="canvas_upper_3d" class='ani_hack upper_3d' width="1920" height="1080"> </canvas>
+    <div data-orientation="landscape" class="orientation-msg-container">
+        <p class="orientation-msg-text">Please rotate your device</p>
+    </div>
+    <div id="block_game"
+        style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%; display:none">
+    </div>
+
+    <div class="message-wrapper" hidden>
+        <div class="message-panel">
+            <div class="" id="message_contant">
+
+            </div>
+            <input placeholder="> here some text" type="text" id="input_message" />
+        </div>
+    </div>
+
+
+    <div id="room_interface" hidden>
+        <div class="rooms_wraper">
+            <div class="head-wraper">
+                <div class="join-roomid">
+                    <input placeholder="room address" class="skew" id="search_roomid" type="text" name="" />
+                    <button type="button" class="btn1 fullbtn skew" id="search_btn">join</button>
+                </div>
+                <div class="light-btn-group">
+                    <button type="button" class=" btn1 fullbtn skew">
+                        <img src="./img/refresh-cw-alt-3-svgrepo-com.svg" id="refresh_roominfo"> Refresh
+                    </button>
+                    <button type="button" class="btn1 fullbtn skew">
+                        <img src="./img/filter-svgrepo-com.svg">Filter</button>
+                </div>
+            </div>
+            <div class="content-wraper">
+
+            </div>
+            <div class="footer-wraper ">
+                <div class="light-btn-group">
+                    <button type="button" class="btn1 fullbtn skew" id="quick_join_btn">Quick Join</button>
+                    <button type="button" class="btn1 fullbtn skew" id="create_room_btn">Create</button>
+                </div>
+            </div>
+        </div>
+        <div id="create_room_modal" class="mb-3" style="position: absolute" hidden>
+            <div class="create_room_modal_wraper">
+                <div class="input-group">
+                    <input type="number" class="form-control" id="bet_amount" placeholder="Enter amount"
+                        style="font-size: 22px" />
+                </div>
+                <div class="input-group">
+                    <input type="checkbox" id="permission" />
+                    <label style="color: white; font-size: 20px;"> Set as private</label>
+                </div>
+                <div class="btn-group-modal">
+                    <button type="button" class="btn1 fullbtn" id="create-room-ok">Open</button>
+                    <button type="button" class="btn1 fullbtn" id="create-room-cancel">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script>
+        document.querySelector(".content-wraper").addEventListener('scroll', function () {
+            var elements = document.getElementsByClassName('fade-on-scroll');
+            for (var i = 0; i < elements.length; i++) {
+                var element = elements[i];
+                var positiontop = element.getBoundingClientRect().top;
+                var positionbottom = element.getBoundingClientRect().bottom;
+                var top = document.querySelector(".rooms_wraper").getBoundingClientRect().top - 100;
+                var bottom = document.querySelector(".rooms_wraper").getBoundingClientRect().bottom + 100;
+                if (positiontop < top) {
+                    element.classList.add('fade');
+                } else if (positionbottom > bottom) {
+                    element.classList.add('fade');
+                } else {
+                    element.classList.remove('fade');
+                }
+            }
+
+        });
+
+
+        function alertShow(msg) {
+            Toastify({
+                text: msg,
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "bottom", // `top` or `bottom`
+                position: "left", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    padding: "10px",
+                    background: "url(./img/alert_bg.png)",
+                }
+            }).showToast();
+        }
+
+        // function promptShow(call) {
+        //     Toastify({
+        //         text: msg,
+        //         // duration: 3000,
+        //         newWindow: true,
+        //         close: true,
+        //         gravity: "top", // `top` or `bottom`
+        //         position: "center", // `left`, `center` or `right`
+        //         // stopOnFocus: true, // Prevents dismissing of toast on hover
+        //         style: {
+        //             padding: "40px",
+        //             background: "url(./img/alert_bg.png)",
+        //         },
+        //         onClick: function () { }
+        //     }).showToast();
+        // }
+    </script>
+</body>
+
+</html>
